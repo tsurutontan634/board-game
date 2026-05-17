@@ -8,17 +8,29 @@ import GameRoom from "./room/GameRoom";
 type LobbyMode = "home" | "create" | "join";
 
 export default function HomePage() {
-  const { roomState, error, connected, createRoom, joinRoom, clearError } =
-    useSocket();
+  // useSocket はここ1箇所だけで呼ぶ。GameRoom には props で渡す
+  const socket = useSocket();
+  const { roomState, error, connected, createRoom, joinRoom, clearError } = socket;
 
   const [mode, setMode] = useState<LobbyMode>("home");
   const [name, setName] = useState("");
   const [color, setColor] = useState(PLAYER_COLORS[0].value);
   const [roomId, setRoomId] = useState("");
 
-  // ゲームに参加済みならゲーム画面へ
+  // roomState がある = 部屋に入っている → ゲーム画面へ
   if (roomState) {
-    return <GameRoom />;
+    return (
+      <GameRoom
+        roomState={socket.roomState}
+        error={socket.error}
+        startGame={socket.startGame}
+        submitRanking={socket.submitRanking}
+        submitGuess={socket.submitGuess}
+        revealNext={socket.revealNext}
+        nextRound={socket.nextRound}
+        clearError={socket.clearError}
+      />
+    );
   }
 
   const handleCreate = () => {

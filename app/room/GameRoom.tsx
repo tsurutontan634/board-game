@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSocket } from "../hooks/useSocket";
+import type { UseSocketReturn } from "../hooks/useSocket";
 import { Board } from "../components/Board";
 import { PhaseIndicator } from "../components/PhaseIndicator";
 import { WaitingPhase } from "../components/phases/WaitingPhase";
@@ -11,18 +11,29 @@ import { RevealingPhase } from "../components/phases/RevealingPhase";
 import { RoundResultPhase } from "../components/phases/RoundResultPhase";
 import { GameEndPhase } from "../components/phases/GameEndPhase";
 
-export default function GameRoom() {
-  const {
-    roomState,
-    error,
-    startGame,
-    submitRanking,
-    submitGuess,
-    revealNext,
-    nextRound,
-    clearError,
-  } = useSocket();
+// useSocket の戻り値をそのまま props で受け取る
+type Props = Pick<
+  UseSocketReturn,
+  | "roomState"
+  | "error"
+  | "startGame"
+  | "submitRanking"
+  | "submitGuess"
+  | "revealNext"
+  | "nextRound"
+  | "clearError"
+>;
 
+export default function GameRoom({
+  roomState,
+  error,
+  startGame,
+  submitRanking,
+  submitGuess,
+  revealNext,
+  nextRound,
+  clearError,
+}: Props) {
   const [boardOpen, setBoardOpen] = useState(true);
 
   if (!roomState) return null;
