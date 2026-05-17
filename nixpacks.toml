@@ -1,13 +1,8 @@
-# Railway (Nixpacks) ビルド設定
 [phases.setup]
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = [
-  "corepack enable",
-  "corepack prepare pnpm@9 --activate",
-  "pnpm install --no-frozen-lockfile"
-]
+cmds = ["npm install -g pnpm@9 && pnpm install"]
 
 [phases.build]
 cmds = ["pnpm build"]
