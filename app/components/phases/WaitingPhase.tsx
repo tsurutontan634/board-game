@@ -1,56 +1,56 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import type { RoomView } from "@/lib/types";
+import type { RoomView, Package } from "@/lib/types";
 import {
   MIN_PLAYERS,
   MAX_PLAYERS,
   DEFAULT_ROUNDS_SMALL,
   DEFAULT_ROUNDS_LARGE,
-  GENRE_EMOJI,
 } from "@/lib/types";
 
 type Props = {
   room: RoomView;
-  onStart: (roundsPerPlayer: number, selectedGenres: string[]) => void;
-  availableGenres?: string[];
+  onStart: (roundsPerPlayer: number, selectedPackageIds: string[]) => void;
+  availablePackages?: Package[];
 };
 
-export function WaitingPhase({ room, onStart, availableGenres = [] }: Props) {
+export function WaitingPhase({ room, onStart, availablePackages = [] }: Props) {
   const isHost = room.players[0]?.id === room.myId;
   const playerCount = room.players.length;
   const defaultRounds = playerCount <= 4 ? DEFAULT_ROUNDS_SMALL : DEFAULT_ROUNDS_LARGE;
   const [roundsPerPlayer, setRoundsPerPlayer] = useState(defaultRounds);
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  // 利用可能ジャンルが読み込まれたら全選択をデフォルトに
+  // パッケージが読み込まれたら全選択をデフォルトに
   useEffect(() => {
-    if (availableGenres.length > 0 && selectedGenres.length === 0) {
-      setSelectedGenres([...availableGenres]);
+    if (availablePackages.length > 0 && selectedIds.length === 0) {
+      setSelectedIds(availablePackages.map((p) => p.id));
     }
-  }, [availableGenres, selectedGenres.length]);
+  }, [availablePackages, selectedIds.length]);
 
   const canStart = playerCount >= MIN_PLAYERS;
 
-  const toggleGenre = (genre: string) => {
-    setSelectedGenres((prev) =>
-      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]
+  const toggle = (id: string) =>
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
-  };
 
-  const toggleAll = () => {
-    if (selectedGenres.length === availableGenres.length) {
-      setSelectedGenres([]);
-    } else {
-      setSelectedGenres([...availableGenres]);
-    }
-  };
+  const toggleAll = () =>
+    setSelectedIds(
+      selectedIds.length === availablePackages.length
+        ? []
+        : availablePackages.map((p) => p.id)
+    );
 
-  const handleStart = () => {
-    // 未選択の場合は全ジャンルを対象にする
-    const genres = selectedGenres.length > 0 ? selectedGenres : [];
-    onStart(roundsPerPlayer, genres);
-  };
+  // 未選択 = 全パッケージ対象
+  const handleStart = () => onStart(roundsPerPlayer, selectedIds);
+
+  // 選択中パッケージの合計お題数（重複除外）は表示用
+  const totalLabel =
+    selectedIds.length === 0
+      ? "全パッケージから出題"
+      : `${selectedIds.length} パッケージを選択中`;
 
   return (
     <div className="space-y-6">
@@ -60,9 +60,7 @@ export function WaitingPhase({ room, onStart, availableGenres = [] }: Props) {
         <p className="text-4xl font-black tracking-widest text-indigo-700 mt-1">
           {room.roomId}
         </p>
-        <p className="text-xs text-indigo-400 mt-1">
-          このIDを入力すれば参加できます
-        </p>
+        <p className="text-xs text-indigo-400 mt-1">このIDを入力すれば参加できます</p>
       </div>
 
       {/* 参加者一覧 */}
@@ -99,7 +97,7 @@ export function WaitingPhase({ room, onStart, availableGenres = [] }: Props) {
       {/* ホストの開始設定 */}
       {isHost && (
         <div className="space-y-4">
-          {/* 出題回数スライダー */}
+          {/* 出題回数 */}
           <div>
             <label className="text-sm font-medium text-gray-700 block mb-1">
               1人あたりの出題回数
@@ -123,53 +121,49 @@ export function WaitingPhase({ room, onStart, availableGenres = [] }: Props) {
             </p>
           </div>
 
-          {/* ジャンル選択 */}
-          {availableGenres.length > 0 && (
+          {/* パッケージ選択 */}
+          {availablePackages.length > 0 && (
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-sm font-medium text-gray-700">
-                  ジャンルを選択
+                  使うパッケージ
                 </label>
                 <button
                   onClick={toggleAll}
                   className="text-xs text-indigo-600 hover:text-indigo-800 font-medium"
                 >
-                  {selectedGenres.length === availableGenres.length
-                    ? "すべて解除"
-                    : "すべて選択"}
+                  {selectedIds.length === availablePackages.length ? "すべて解除" : "すべて選択"}
                 </button>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                {availableGenres.map((genre) => {
-                  const emoji = GENRE_EMOJI[genre] ?? "📌";
-                  const selected = selectedGenres.includes(genre);
+              <div className="space-y-2">
+                {availablePackages.map((pkg) => {
+                  const selected = selectedIds.includes(pkg.id);
+                  const isDefault = pkg.id === "pkg-default";
                   return (
                     <button
-                      key={genre}
-                      onClick={() => toggleGenre(genre)}
-                      className={`
-                        flex items-center gap-2 px-3 py-2 rounded-xl border-2 text-sm font-medium transition-all
-                        ${
-                          selected
-                            ? "border-indigo-500 bg-indigo-50 text-indigo-700"
-                            : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
-                        }
-                      `}
+                      key={pkg.id}
+                      onClick={() => toggle(pkg.id)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border-2 text-left transition-all ${
+                        selected
+                          ? "border-indigo-500 bg-indigo-50"
+                          : "border-gray-200 bg-white hover:border-gray-300"
+                      }`}
                     >
-                      <span className="text-base">{emoji}</span>
-                      <span className="leading-tight text-left">{genre}</span>
-                      {selected && (
-                        <span className="ml-auto text-indigo-400 text-xs">✓</span>
-                      )}
+                      <span className="text-lg">{isDefault ? "📦" : "🗂️"}</span>
+                      <span className={`font-medium text-sm flex-1 ${selected ? "text-indigo-700" : "text-gray-600"}`}>
+                        {pkg.name}
+                      </span>
+                      <span className="text-xs text-gray-400">{pkg.topicIds.length}件</span>
+                      <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                        selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"
+                      }`}>
+                        {selected && <span className="text-white text-xs font-black">✓</span>}
+                      </span>
                     </button>
                   );
                 })}
               </div>
-              <p className="text-xs text-gray-400 mt-2">
-                {selectedGenres.length === 0
-                  ? "⚠️ 未選択時はすべてのジャンルから出題"
-                  : `${selectedGenres.length} ジャンルを選択中`}
-              </p>
+              <p className="text-xs text-gray-400 mt-1.5">{totalLabel}</p>
             </div>
           )}
 
@@ -177,14 +171,11 @@ export function WaitingPhase({ room, onStart, availableGenres = [] }: Props) {
           <button
             onClick={handleStart}
             disabled={!canStart}
-            className={`
-              w-full py-4 rounded-xl font-black text-xl transition-all
-              ${
-                canStart
-                  ? "bg-indigo-600 text-white hover:bg-indigo-700 active:scale-95 shadow-lg"
-                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
-              }
-            `}
+            className={`w-full py-4 rounded-xl font-black text-xl transition-all ${
+              canStart
+                ? "bg-indigo-600 text-white hover:bg-indigo-700 active:scale-95 shadow-lg"
+                : "bg-gray-200 text-gray-400 cursor-not-allowed"
+            }`}
           >
             🎮 ゲームスタート！
           </button>

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "pkg-default",
+    "name": "デフォルト",
+    "topicIds": [
+      "topic-001",
+      "topic-002",
+      "topic-003",
+      "topic-004",
+      "topic-005",
+      "topic-006",
+      "topic-007",
+      "topic-008",
+      "topic-009",
+      "topic-010",
+      "topic-011",
+      "topic-012",
+      "topic-013",
+      "topic-014",
+      "topic-015",
+      "topic-016",
+      "topic-017",
+      "topic-018",
+      "topic-019",
+      "topic-020"
+    ]
+  }
+]

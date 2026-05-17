@@ -8,9 +8,15 @@ export type OptionKey = "A" | "B" | "C" | "D" | "E" | "F" | "G";
 /** お題1件 */
 export type Topic = {
   id: string;
-  genre: string;      // ジャンル名
   question: string;
   options: Record<OptionKey, string>;
+};
+
+/** お題パッケージ */
+export type Package = {
+  id: string;
+  name: string;
+  topicIds: string[];
 };
 
 // ============================================================
@@ -71,7 +77,7 @@ export type Room = {
   roundsPerPlayer: number;                    // 1人あたりの出題回数
   usedTopicIds: string[];
   lastResults: Record<string, RoundResult> | null;
-  selectedGenres: string[];                   // 選択されたジャンル (空=全部)
+  selectedPackageIds: string[];               // 選択されたパッケージID (空=全部)
 };
 
 // ============================================================
@@ -86,9 +92,30 @@ export type RoomView = Omit<Room, "hostRanking"> & {
 // お題追加のペイロード
 // ============================================================
 export type AddTopicPayload = {
-  genre: string;
   question: string;
   options: Record<OptionKey, string>;
+  packageId: string;   // 追加先パッケージID
+};
+
+// ============================================================
+// パッケージ操作のペイロード
+// ============================================================
+export type CreatePackagePayload = {
+  name: string;
+};
+
+export type DeletePackagePayload = {
+  packageId: string;
+};
+
+export type DeleteTopicPayload = {
+  topicId: string;
+  packageId: string;  // どのパッケージから削除するか
+};
+
+export type AddTopicToPackagePayload = {
+  topicId: string;
+  packageId: string;
 };
 
 // ============================================================
@@ -99,21 +126,25 @@ export type AddTopicPayload = {
 export interface ClientToServerEvents {
   "room:create": (payload: { name: string; color: string }) => void;
   "room:join": (payload: { roomId: string; name: string; color: string }) => void;
-  "game:start": (payload: { roundsPerPlayer: number; selectedGenres: string[] }) => void;
+  "game:start": (payload: { roundsPerPlayer: number; selectedPackageIds: string[] }) => void;
   "host:submitRanking": (payload: { ranking: [OptionKey, OptionKey, OptionKey] }) => void;
   "player:submitGuess": (payload: { guess: [OptionKey, OptionKey, OptionKey] }) => void;
   "reveal:next": () => void;
   "round:next": () => void;
-  "topic:add": (payload: AddTopicPayload) => void;     // お題をその場で追加
-  "topics:list": () => void;                            // お題一覧を要求
+  // お題・パッケージ管理
+  "packages:list": () => void;
+  "package:create": (payload: CreatePackagePayload) => void;
+  "package:delete": (payload: DeletePackagePayload) => void;
+  "topic:add": (payload: AddTopicPayload) => void;
+  "topic:delete": (payload: DeleteTopicPayload) => void;
+  "topic:addToPackage": (payload: AddTopicToPackagePayload) => void;
 }
 
 /** サーバー → クライアント */
 export interface ServerToClientEvents {
   "room:state": (state: RoomView) => void;
   "room:error": (payload: { message: string }) => void;
-  "topics:data": (payload: { topics: Topic[]; genres: string[] }) => void; // お題一覧
-  "topic:added": (payload: { topic: Topic }) => void;  // 追加成功通知
+  "packages:data": (payload: { packages: Package[]; topics: Topic[] }) => void;
 }
 
 // ============================================================
@@ -160,15 +191,3 @@ export const MIN_PLAYERS = 2;
 
 /** 最大プレイ人数 */
 export const MAX_PLAYERS = 6;
-
-/** ジャンルの絵文字マップ */
-export const GENRE_EMOJI: Record<string, string> = {
-  "日常・生活":     "🏠",
-  "もしも・仮想":   "✨",
-  "グルメ・食":     "🍜",
-  "旅行・おでかけ": "✈️",
-  "仕事・キャリア": "💼",
-  "恋愛・人間関係": "💕",
-  "お金・人生":     "💰",
-  "エンタメ・趣味": "🎮",
-};

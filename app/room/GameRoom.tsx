@@ -12,7 +12,6 @@ import { RevealingPhase } from "../components/phases/RevealingPhase";
 import { RoundResultPhase } from "../components/phases/RoundResultPhase";
 import { GameEndPhase } from "../components/phases/GameEndPhase";
 
-// useSocket の戻り値をそのまま props で受け取る
 type Props = Pick<
   UseSocketReturn,
   | "roomState"
@@ -23,9 +22,13 @@ type Props = Pick<
   | "revealNext"
   | "nextRound"
   | "clearError"
+  | "packagesData"
+  | "requestPackagesList"
+  | "createPackage"
+  | "deletePackage"
   | "addTopic"
-  | "requestTopicsList"
-  | "topicsData"
+  | "deleteTopic"
+  | "addTopicToPackage"
 >;
 
 export default function GameRoom({
@@ -37,9 +40,13 @@ export default function GameRoom({
   revealNext,
   nextRound,
   clearError,
+  packagesData,
+  requestPackagesList,
+  createPackage,
+  deletePackage,
   addTopic,
-  requestTopicsList,
-  topicsData,
+  deleteTopic,
+  addTopicToPackage,
 }: Props) {
   const [boardOpen, setBoardOpen] = useState(true);
   const [showTopicManager, setShowTopicManager] = useState(false);
@@ -48,7 +55,7 @@ export default function GameRoom({
 
   const room = roomState;
   const host = room.players[room.hostIndex];
-  const availableGenres = topicsData?.genres ?? [];
+  const availablePackages = packagesData?.packages ?? [];
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -67,26 +74,22 @@ export default function GameRoom({
             </div>
             {host && room.phase !== "WAITING" && room.phase !== "GAME_END" && (
               <div className="flex items-center gap-1 mt-0.5">
-                <div
-                  className="w-2.5 h-2.5 rounded-full"
-                  style={{ backgroundColor: host.color }}
-                />
+                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: host.color }} />
                 <span className="text-xs text-gray-500">出題者: {host.name}</span>
               </div>
             )}
           </div>
 
-          {/* お題管理ボタン (WAITING フェーズのみ表示) */}
+          {/* パッケージ管理ボタン (WAITING フェーズのみ) */}
           {room.phase === "WAITING" && (
             <button
               onClick={() => setShowTopicManager(true)}
               className="text-xs text-amber-600 font-bold bg-amber-50 border border-amber-200 rounded-lg px-2 py-1 hover:bg-amber-100 transition-colors flex-shrink-0"
             >
-              📋 お題
+              📦 お題
             </button>
           )}
 
-          {/* プレイヤー一覧ミニ表示 */}
           <div className="flex -space-x-1">
             {room.players.slice(0, 5).map((p) => (
               <div
@@ -101,17 +104,11 @@ export default function GameRoom({
       </header>
 
       <div className="max-w-2xl mx-auto px-4 py-4 space-y-4">
-        {/* エラーバナー */}
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-xl p-3 flex items-start gap-2">
             <span className="text-red-500">⚠️</span>
             <p className="text-sm text-red-700 flex-1">{error}</p>
-            <button
-              onClick={clearError}
-              className="text-red-400 hover:text-red-600 text-lg leading-none"
-            >
-              ×
-            </button>
+            <button onClick={clearError} className="text-red-400 hover:text-red-600 text-lg leading-none">×</button>
           </div>
         )}
 
@@ -137,7 +134,7 @@ export default function GameRoom({
             <WaitingPhase
               room={room}
               onStart={startGame}
-              availableGenres={availableGenres}
+              availablePackages={availablePackages}
             />
           )}
           {room.phase === "HOST_RANKING" && (
@@ -158,12 +155,15 @@ export default function GameRoom({
         </div>
       </div>
 
-      {/* お題管理モーダル */}
       {showTopicManager && (
         <TopicManager
-          topicsData={topicsData}
-          onAdd={addTopic}
-          onRequestList={requestTopicsList}
+          packagesData={packagesData}
+          onRequestList={requestPackagesList}
+          onCreatePackage={createPackage}
+          onDeletePackage={deletePackage}
+          onAddTopic={addTopic}
+          onDeleteTopic={deleteTopic}
+          onAddTopicToPackage={addTopicToPackage}
           onClose={() => setShowTopicManager(false)}
         />
       )}

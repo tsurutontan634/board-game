@@ -8,10 +8,20 @@ import type {
   ServerToClientEvents,
   OptionKey,
   AddTopicPayload,
+  CreatePackagePayload,
+  DeletePackagePayload,
+  DeleteTopicPayload,
+  AddTopicToPackagePayload,
+  Package,
   Topic,
 } from "@/lib/types";
 
 type SocketType = Socket<ServerToClientEvents, ClientToServerEvents>;
+
+export type PackagesData = {
+  packages: Package[];
+  topics: Topic[];
+};
 
 export type UseSocketReturn = {
   roomState: RoomView | null;
@@ -19,16 +29,20 @@ export type UseSocketReturn = {
   connected: boolean;
   createRoom: (name: string, color: string) => void;
   joinRoom: (roomId: string, name: string, color: string) => void;
-  startGame: (roundsPerPlayer: number, selectedGenres: string[]) => void;
+  startGame: (roundsPerPlayer: number, selectedPackageIds: string[]) => void;
   submitRanking: (ranking: [OptionKey, OptionKey, OptionKey]) => void;
   submitGuess: (guess: [OptionKey, OptionKey, OptionKey]) => void;
   revealNext: () => void;
   nextRound: () => void;
   clearError: () => void;
-  // お題管理
+  // パッケージ・お題管理
+  packagesData: PackagesData | null;
+  requestPackagesList: () => void;
+  createPackage: (payload: CreatePackagePayload) => void;
+  deletePackage: (payload: DeletePackagePayload) => void;
   addTopic: (payload: AddTopicPayload) => void;
-  requestTopicsList: () => void;
-  topicsData: { topics: Topic[]; genres: string[] } | null;
+  deleteTopic: (payload: DeleteTopicPayload) => void;
+  addTopicToPackage: (payload: AddTopicToPackagePayload) => void;
 };
 
 export function useSocket(): UseSocketReturn {
@@ -36,10 +50,9 @@ export function useSocket(): UseSocketReturn {
   const [roomState, setRoomState] = useState<RoomView | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [connected, setConnected] = useState(false);
-  const [topicsData, setTopicsData] = useState<{ topics: Topic[]; genres: string[] } | null>(null);
+  const [packagesData, setPackagesData] = useState<PackagesData | null>(null);
 
   useEffect(() => {
-    // サーバーと同じオリジンに接続
     const socket: SocketType = io({
       path: "/api/socket",
       transports: ["websocket", "polling"],
@@ -51,10 +64,7 @@ export function useSocket(): UseSocketReturn {
     socket.on("disconnect", () => setConnected(false));
     socket.on("room:state", (state) => setRoomState(state));
     socket.on("room:error", ({ message }) => setError(message));
-    socket.on("topics:data", (data) => setTopicsData(data));
-    socket.on("topic:added", () => {
-      // topics:data イベントで一覧も更新されるので追加通知のみ
-    });
+    socket.on("packages:data", (data) => setPackagesData(data));
 
     return () => {
       socket.disconnect();
@@ -83,8 +93,8 @@ export function useSocket(): UseSocketReturn {
   );
 
   const startGame = useCallback(
-    (roundsPerPlayer: number, selectedGenres: string[]) =>
-      emit("game:start", { roundsPerPlayer, selectedGenres }),
+    (roundsPerPlayer: number, selectedPackageIds: string[]) =>
+      emit("game:start", { roundsPerPlayer, selectedPackageIds }),
     [emit]
   );
 
@@ -100,16 +110,36 @@ export function useSocket(): UseSocketReturn {
     [emit]
   );
 
-  const revealNext = useCallback(() => emit("reveal:next"), [emit]);
-  const nextRound = useCallback(() => emit("round:next"), [emit]);
-  const clearError = useCallback(() => setError(null), []);
+  const revealNext    = useCallback(() => emit("reveal:next"), [emit]);
+  const nextRound     = useCallback(() => emit("round:next"),  [emit]);
+  const clearError    = useCallback(() => setError(null), []);
+
+  const requestPackagesList = useCallback(() => emit("packages:list"), [emit]);
+
+  const createPackage = useCallback(
+    (payload: CreatePackagePayload) => emit("package:create", payload),
+    [emit]
+  );
+
+  const deletePackage = useCallback(
+    (payload: DeletePackagePayload) => emit("package:delete", payload),
+    [emit]
+  );
 
   const addTopic = useCallback(
     (payload: AddTopicPayload) => emit("topic:add", payload),
     [emit]
   );
 
-  const requestTopicsList = useCallback(() => emit("topics:list"), [emit]);
+  const deleteTopic = useCallback(
+    (payload: DeleteTopicPayload) => emit("topic:delete", payload),
+    [emit]
+  );
+
+  const addTopicToPackage = useCallback(
+    (payload: AddTopicToPackagePayload) => emit("topic:addToPackage", payload),
+    [emit]
+  );
 
   return {
     roomState,
@@ -123,8 +153,12 @@ export function useSocket(): UseSocketReturn {
     revealNext,
     nextRound,
     clearError,
+    packagesData,
+    requestPackagesList,
+    createPackage,
+    deletePackage,
     addTopic,
-    requestTopicsList,
-    topicsData,
+    deleteTopic,
+    addTopicToPackage,
   };
 }

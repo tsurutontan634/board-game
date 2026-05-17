@@ -9,7 +9,6 @@ import { TopicManager } from "./components/TopicManager";
 type LobbyMode = "home" | "create" | "join";
 
 export default function HomePage() {
-  // useSocket はここ1箇所だけで呼ぶ。GameRoom には props で渡す
   const socket = useSocket();
   const {
     roomState,
@@ -18,9 +17,13 @@ export default function HomePage() {
     createRoom,
     joinRoom,
     clearError,
+    packagesData,
+    requestPackagesList,
+    createPackage,
+    deletePackage,
     addTopic,
-    requestTopicsList,
-    topicsData,
+    deleteTopic,
+    addTopicToPackage,
   } = socket;
 
   const [mode, setMode] = useState<LobbyMode>("home");
@@ -29,7 +32,6 @@ export default function HomePage() {
   const [roomId, setRoomId] = useState("");
   const [showTopicManager, setShowTopicManager] = useState(false);
 
-  // roomState がある = 部屋に入っている → ゲーム画面へ
   if (roomState) {
     return (
       <GameRoom
@@ -41,9 +43,13 @@ export default function HomePage() {
         revealNext={socket.revealNext}
         nextRound={socket.nextRound}
         clearError={socket.clearError}
+        packagesData={socket.packagesData}
+        requestPackagesList={socket.requestPackagesList}
+        createPackage={socket.createPackage}
+        deletePackage={socket.deletePackage}
         addTopic={socket.addTopic}
-        requestTopicsList={socket.requestTopicsList}
-        topicsData={socket.topicsData}
+        deleteTopic={socket.deleteTopic}
+        addTopicToPackage={socket.addTopicToPackage}
       />
     );
   }
@@ -74,14 +80,8 @@ export default function HomePage() {
 
         {/* 接続状態 */}
         <div className="flex items-center justify-center gap-1.5 mb-4">
-          <div
-            className={`w-2 h-2 rounded-full ${
-              connected ? "bg-green-400" : "bg-gray-300"
-            }`}
-          />
-          <span className="text-xs text-gray-500">
-            {connected ? "接続済み" : "接続中..."}
-          </span>
+          <div className={`w-2 h-2 rounded-full ${connected ? "bg-green-400" : "bg-gray-300"}`} />
+          <span className="text-xs text-gray-500">{connected ? "接続済み" : "接続中..."}</span>
         </div>
 
         {/* エラー */}
@@ -89,12 +89,7 @@ export default function HomePage() {
           <div className="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 flex items-start gap-2">
             <span className="text-red-500">⚠️</span>
             <p className="text-sm text-red-700 flex-1">{error}</p>
-            <button
-              onClick={clearError}
-              className="text-red-400 hover:text-red-600 text-lg leading-none"
-            >
-              ×
-            </button>
+            <button onClick={clearError} className="text-red-400 hover:text-red-600 text-lg leading-none">×</button>
           </div>
         )}
 
@@ -114,16 +109,13 @@ export default function HomePage() {
               >
                 🚪 部屋に参加する
               </button>
-
-              {/* お題管理ボタン */}
               <button
                 onClick={() => setShowTopicManager(true)}
                 className="w-full py-3 bg-amber-50 text-amber-700 font-bold text-sm rounded-xl border-2 border-amber-200 hover:bg-amber-100 active:scale-95 transition-all"
               >
-                📋 お題を管理する
+                📦 お題・パッケージを管理する
               </button>
 
-              {/* ゲーム説明 */}
               <div className="border-t pt-4">
                 <p className="text-xs text-gray-500 font-bold mb-2">🎮 遊び方</p>
                 <ul className="text-xs text-gray-400 space-y-1 list-none">
@@ -138,7 +130,6 @@ export default function HomePage() {
 
           {(mode === "create" || mode === "join") && (
             <>
-              {/* 戻るボタン */}
               <button
                 onClick={() => setMode("home")}
                 className="text-sm text-gray-400 hover:text-gray-600 flex items-center gap-1"
@@ -146,11 +137,8 @@ export default function HomePage() {
                 ← 戻る
               </button>
 
-              {/* 名前入力 */}
               <div>
-                <label className="text-sm font-bold text-gray-700 block mb-1">
-                  あなたの名前
-                </label>
+                <label className="text-sm font-bold text-gray-700 block mb-1">あなたの名前</label>
                 <input
                   type="text"
                   value={name}
@@ -161,23 +149,16 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* コマ色選択 */}
               <div>
-                <label className="text-sm font-bold text-gray-700 block mb-2">
-                  コマの色
-                </label>
+                <label className="text-sm font-bold text-gray-700 block mb-2">コマの色</label>
                 <div className="flex gap-2 flex-wrap">
                   {PLAYER_COLORS.map((c) => (
                     <button
                       key={c.value}
                       onClick={() => setColor(c.value)}
-                      className={`
-                        w-9 h-9 rounded-full border-4 transition-all
-                        ${color === c.value
-                          ? "border-gray-800 scale-110 shadow-lg"
-                          : "border-transparent hover:border-gray-300"
-                        }
-                      `}
+                      className={`w-9 h-9 rounded-full border-4 transition-all ${
+                        color === c.value ? "border-gray-800 scale-110 shadow-lg" : "border-transparent hover:border-gray-300"
+                      }`}
                       style={{ backgroundColor: c.value }}
                       title={c.name}
                     />
@@ -185,18 +166,13 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* 参加の場合: 部屋ID入力 */}
               {mode === "join" && (
                 <div>
-                  <label className="text-sm font-bold text-gray-700 block mb-1">
-                    部屋ID (6桁)
-                  </label>
+                  <label className="text-sm font-bold text-gray-700 block mb-1">部屋ID (6桁)</label>
                   <input
                     type="text"
                     value={roomId}
-                    onChange={(e) =>
-                      setRoomId(e.target.value.toUpperCase().slice(0, 6))
-                    }
+                    onChange={(e) => setRoomId(e.target.value.toUpperCase().slice(0, 6))}
                     placeholder="例: AB3C7E"
                     maxLength={6}
                     className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm font-mono tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-indigo-400"
@@ -204,21 +180,14 @@ export default function HomePage() {
                 </div>
               )}
 
-              {/* 決定ボタン */}
               <button
                 onClick={mode === "create" ? handleCreate : handleJoin}
-                disabled={
-                  !name.trim() ||
-                  (mode === "join" && roomId.length < 6)
-                }
-                className={`
-                  w-full py-4 rounded-xl font-black text-lg transition-all
-                  ${
-                    name.trim() && (mode === "create" || roomId.length >= 6)
-                      ? "bg-indigo-600 text-white hover:bg-indigo-700 active:scale-95 shadow-lg"
-                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  }
-                `}
+                disabled={!name.trim() || (mode === "join" && roomId.length < 6)}
+                className={`w-full py-4 rounded-xl font-black text-lg transition-all ${
+                  name.trim() && (mode === "create" || roomId.length >= 6)
+                    ? "bg-indigo-600 text-white hover:bg-indigo-700 active:scale-95 shadow-lg"
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                }`}
               >
                 {mode === "create" ? "🏠 部屋を作成する" : "🚪 参加する"}
               </button>
@@ -227,12 +196,15 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* お題管理モーダル */}
       {showTopicManager && (
         <TopicManager
-          topicsData={topicsData}
-          onAdd={addTopic}
-          onRequestList={requestTopicsList}
+          packagesData={packagesData}
+          onRequestList={requestPackagesList}
+          onCreatePackage={createPackage}
+          onDeletePackage={deletePackage}
+          onAddTopic={addTopic}
+          onDeleteTopic={deleteTopic}
+          onAddTopicToPackage={addTopicToPackage}
           onClose={() => setShowTopicManager(false)}
         />
       )}

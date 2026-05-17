@@ -11,11 +11,16 @@ import type {
   Room,
   Player,
   Topic,
+  Package,
   OptionKey,
   RoomView,
   ClientToServerEvents,
   ServerToClientEvents,
   AddTopicPayload,
+  CreatePackagePayload,
+  DeletePackagePayload,
+  DeleteTopicPayload,
+  AddTopicToPackagePayload,
 } from "../lib/types";
 import {
   ROOM_ID_LENGTH,
@@ -28,53 +33,80 @@ import {
 } from "../lib/types";
 
 // ============================================================
-// お題データの読み込み & バリデーション
+// データファイルパス
 // ============================================================
-const TOPICS_PATH = join(process.cwd(), "data", "topics.json");
+const TOPICS_PATH   = join(process.cwd(), "data", "topics.json");
+const PACKAGES_PATH = join(process.cwd(), "data", "packages.json");
 
+// ============================================================
+// お題データの読み込み & 保存
+// ============================================================
 function loadTopics(): Topic[] {
   const raw = readFileSync(TOPICS_PATH, "utf-8");
   const data = JSON.parse(raw) as unknown[];
-
   return data.map((item, idx) => {
     const t = item as Record<string, unknown>;
     if (typeof t.id !== "string" || typeof t.question !== "string") {
       throw new Error(`topics.json[${idx}]: id と question は文字列必須`);
     }
-    if (typeof t.genre !== "string") {
-      throw new Error(`topics.json[${idx}]: genre は文字列必須`);
-    }
     const opts = t.options as Record<string, unknown>;
-    for (const key of OPTION_KEYS) {
-      if (typeof opts[key] !== "string") {
-        throw new Error(`topics.json[${idx}]: options.${key} が不足`);
-      }
+    // 空文字は許容（選択肢が少ないお題もOK）
+    const filledCount = OPTION_KEYS.filter((k) => typeof opts[k] === "string" && (opts[k] as string).trim() !== "").length;
+    if (filledCount < 3) {
+      throw new Error(`topics.json[${idx}]: options は3つ以上必要`);
     }
     return t as unknown as Topic;
   });
 }
 
-// 起動時に読み込み。インメモリで追加されたお題も含める
-let allTopics: Topic[] = loadTopics();
-
-/** 全ジャンル一覧を返す (重複排除・ソート済み) */
-function getAllGenres(): string[] {
-  return [...new Set(allTopics.map((t) => t.genre))].sort();
-}
-
-/** ジャンルでフィルタしたお題を返す (空配列=全部) */
-function getTopicsByGenres(genres: string[]): Topic[] {
-  if (genres.length === 0) return allTopics;
-  return allTopics.filter((t) => genres.includes(t.genre));
-}
-
-/** お題をファイルに永続化する */
 function saveTopics(): void {
   try {
     writeFileSync(TOPICS_PATH, JSON.stringify(allTopics, null, 2), "utf-8");
   } catch (e) {
     console.error("[topics] ファイル保存失敗:", e);
   }
+}
+
+// ============================================================
+// パッケージデータの読み込み & 保存
+// ============================================================
+function loadPackages(): Package[] {
+  try {
+    const raw = readFileSync(PACKAGES_PATH, "utf-8");
+    return JSON.parse(raw) as Package[];
+  } catch {
+    // ファイルがなければ空配列
+    return [];
+  }
+}
+
+function savePackages(): void {
+  try {
+    writeFileSync(PACKAGES_PATH, JSON.stringify(allPackages, null, 2), "utf-8");
+  } catch (e) {
+    console.error("[packages] ファイル保存失敗:", e);
+  }
+}
+
+// インメモリ状態
+let allTopics: Topic[]     = loadTopics();
+let allPackages: Package[] = loadPackages();
+
+// ============================================================
+// パッケージからお題プールを作る
+// ============================================================
+/** 選択パッケージIDのお題をマージして重複排除したプールを返す (空=全件) */
+function getTopicsByPackages(selectedPackageIds: string[]): Topic[] {
+  if (selectedPackageIds.length === 0) return allTopics;
+
+  const idSet = new Set<string>();
+  for (const pkgId of selectedPackageIds) {
+    const pkg = allPackages.find((p) => p.id === pkgId);
+    if (pkg) {
+      for (const tid of pkg.topicIds) idSet.add(tid);
+    }
+  }
+  return allTopics.filter((t) => idSet.has(t.id));
 }
 
 // ============================================================
@@ -97,9 +129,9 @@ function createUniqueRoomId(): string {
   return id;
 }
 
-/** 使われていないお題をジャンルフィルタ込みでランダムに1件返す */
-function pickTopic(usedIds: string[], selectedGenres: string[]): Topic | null {
-  const pool = getTopicsByGenres(selectedGenres).filter(
+/** 使われていないお題をパッケージフィルタ込みでランダムに1件返す */
+function pickTopic(usedIds: string[], selectedPackageIds: string[]): Topic | null {
+  const pool = getTopicsByPackages(selectedPackageIds).filter(
     (t) => !usedIds.includes(t.id)
   );
   if (pool.length === 0) return null;
@@ -138,6 +170,13 @@ function defaultRoundsPerPlayer(playerCount: number): number {
   return playerCount <= 4 ? DEFAULT_ROUNDS_SMALL : DEFAULT_ROUNDS_LARGE;
 }
 
+/** packages:data を送信するヘルパー */
+function emitPackagesData(
+  socket: Socket<ClientToServerEvents, ServerToClientEvents>
+): void {
+  socket.emit("packages:data", { packages: allPackages, topics: allTopics });
+}
+
 // ============================================================
 // Socket.IO イベントハンドラ登録
 // ============================================================
@@ -174,7 +213,7 @@ export function registerSocketHandlers(
         roundsPerPlayer: 0,
         usedTopicIds: [],
         lastResults: null,
-        selectedGenres: [],
+        selectedPackageIds: [],
       };
       rooms.set(roomId, room);
       socket.join(roomId);
@@ -212,9 +251,9 @@ export function registerSocketHandlers(
     });
 
     // --------------------------------------------------------
-    // ゲーム開始 (ジャンル選択込み)
+    // ゲーム開始 (パッケージ選択込み)
     // --------------------------------------------------------
-    socket.on("game:start", ({ roundsPerPlayer, selectedGenres }) => {
+    socket.on("game:start", ({ roundsPerPlayer, selectedPackageIds }) => {
       const room = findRoomBySocket(socket.id);
       if (!room) return;
 
@@ -231,24 +270,23 @@ export function registerSocketHandlers(
         return;
       }
 
-      // 選択ジャンルが1つも対象お題を持たないケースを検出
-      const pool = getTopicsByGenres(selectedGenres);
+      const pool = getTopicsByPackages(selectedPackageIds);
       if (pool.length === 0) {
-        socket.emit("room:error", { message: "選択したジャンルにお題がありません" });
+        socket.emit("room:error", { message: "選択したパッケージにお題がありません" });
         return;
       }
 
       const rpp = Math.max(1, Math.floor(roundsPerPlayer)) ||
         defaultRoundsPerPlayer(room.players.length);
 
-      room.selectedGenres = selectedGenres;
+      room.selectedPackageIds = selectedPackageIds;
       room.roundsPerPlayer = rpp;
       room.maxRounds = room.players.length * rpp;
       room.round = 1;
       room.hostIndex = 0;
       room.phase = "HOST_RANKING";
 
-      const topic = pickTopic(room.usedTopicIds, room.selectedGenres);
+      const topic = pickTopic(room.usedTopicIds, room.selectedPackageIds);
       if (!topic) {
         socket.emit("room:error", { message: "使えるお題がありません" });
         return;
@@ -386,7 +424,7 @@ export function registerSocketHandlers(
       room.revealedCount = 0;
       room.lastResults = null;
 
-      const topic = pickTopic(room.usedTopicIds, room.selectedGenres);
+      const topic = pickTopic(room.usedTopicIds, room.selectedPackageIds);
       if (!topic) {
         socket.emit("room:error", { message: "お題が不足しています。ゲームを終了します" });
         room.phase = "GAME_END";
@@ -400,45 +438,144 @@ export function registerSocketHandlers(
     });
 
     // --------------------------------------------------------
-    // お題を追加 (誰でも追加可)
+    // パッケージ一覧を返す
     // --------------------------------------------------------
-    socket.on("topic:add", (payload: AddTopicPayload) => {
-      const { genre, question, options } = payload;
+    socket.on("packages:list", () => {
+      emitPackagesData(socket);
+    });
 
-      // バリデーション
-      if (!genre.trim() || !question.trim()) {
-        socket.emit("room:error", { message: "ジャンルと質問文は必須です" });
+    // --------------------------------------------------------
+    // パッケージ作成
+    // --------------------------------------------------------
+    socket.on("package:create", (payload: CreatePackagePayload) => {
+      const name = payload.name?.trim();
+      if (!name) {
+        socket.emit("room:error", { message: "パッケージ名は必須です" });
         return;
       }
-      for (const key of OPTION_KEYS) {
-        if (!options[key]?.trim()) {
-          socket.emit("room:error", { message: `選択肢 ${key} が空です` });
-          return;
-        }
+      if (allPackages.some((p) => p.name === name)) {
+        socket.emit("room:error", { message: `「${name}」は既に存在します` });
+        return;
+      }
+      const newPkg: Package = {
+        id: `pkg-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+        name,
+        topicIds: [],
+      };
+      allPackages.push(newPkg);
+      savePackages();
+      emitPackagesData(socket);
+    });
+
+    // --------------------------------------------------------
+    // パッケージ削除 (デフォルトは削除不可)
+    // --------------------------------------------------------
+    socket.on("package:delete", (payload: DeletePackagePayload) => {
+      const { packageId } = payload;
+      if (packageId === "pkg-default") {
+        socket.emit("room:error", { message: "デフォルトパッケージは削除できません" });
+        return;
+      }
+      const idx = allPackages.findIndex((p) => p.id === packageId);
+      if (idx === -1) {
+        socket.emit("room:error", { message: "パッケージが見つかりません" });
+        return;
+      }
+      allPackages.splice(idx, 1);
+      savePackages();
+      emitPackagesData(socket);
+    });
+
+    // --------------------------------------------------------
+    // お題を新規追加して指定パッケージに入れる
+    // --------------------------------------------------------
+    socket.on("topic:add", (payload: AddTopicPayload) => {
+      const { question, options, packageId } = payload;
+
+      if (!question?.trim()) {
+        socket.emit("room:error", { message: "質問文は必須です" });
+        return;
+      }
+      const filledCount = OPTION_KEYS.filter(
+        (k) => options[k]?.trim()
+      ).length;
+      if (filledCount < 3) {
+        socket.emit("room:error", { message: "選択肢を3つ以上入力してください" });
+        return;
+      }
+
+      const pkg = allPackages.find((p) => p.id === packageId);
+      if (!pkg) {
+        socket.emit("room:error", { message: "指定されたパッケージが見つかりません" });
+        return;
       }
 
       const newTopic: Topic = {
         id: `topic-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-        genre: genre.trim(),
         question: question.trim(),
         options: Object.fromEntries(
-          OPTION_KEYS.map((k) => [k, options[k].trim()])
+          OPTION_KEYS.map((k) => [k, (options[k] ?? "").trim()])
         ) as Record<OptionKey, string>,
       };
 
       allTopics.push(newTopic);
-      saveTopics();  // ファイルに永続化
+      saveTopics();
 
-      socket.emit("topic:added", { topic: newTopic });
-      // 追加後にお題リストも更新配信
-      socket.emit("topics:data", { topics: allTopics, genres: getAllGenres() });
+      pkg.topicIds.push(newTopic.id);
+      savePackages();
+
+      emitPackagesData(socket);
     });
 
     // --------------------------------------------------------
-    // お題一覧を返す
+    // お題削除 (指定パッケージから外す or 完全削除)
     // --------------------------------------------------------
-    socket.on("topics:list", () => {
-      socket.emit("topics:data", { topics: allTopics, genres: getAllGenres() });
+    socket.on("topic:delete", (payload: DeleteTopicPayload) => {
+      const { topicId, packageId } = payload;
+
+      const pkg = allPackages.find((p) => p.id === packageId);
+      if (!pkg) {
+        socket.emit("room:error", { message: "パッケージが見つかりません" });
+        return;
+      }
+
+      // パッケージからIDを外す
+      pkg.topicIds = pkg.topicIds.filter((id) => id !== topicId);
+      savePackages();
+
+      // どのパッケージにも含まれていなければお題自体も削除
+      const usedInAny = allPackages.some((p) => p.topicIds.includes(topicId));
+      if (!usedInAny) {
+        allTopics = allTopics.filter((t) => t.id !== topicId);
+        saveTopics();
+      }
+
+      emitPackagesData(socket);
+    });
+
+    // --------------------------------------------------------
+    // 既存お題を別パッケージに追加
+    // --------------------------------------------------------
+    socket.on("topic:addToPackage", (payload: AddTopicToPackagePayload) => {
+      const { topicId, packageId } = payload;
+
+      const pkg = allPackages.find((p) => p.id === packageId);
+      if (!pkg) {
+        socket.emit("room:error", { message: "パッケージが見つかりません" });
+        return;
+      }
+      if (pkg.topicIds.includes(topicId)) {
+        socket.emit("room:error", { message: "既にそのパッケージに含まれています" });
+        return;
+      }
+      if (!allTopics.find((t) => t.id === topicId)) {
+        socket.emit("room:error", { message: "お題が見つかりません" });
+        return;
+      }
+
+      pkg.topicIds.push(topicId);
+      savePackages();
+      emitPackagesData(socket);
     });
 
     // --------------------------------------------------------
