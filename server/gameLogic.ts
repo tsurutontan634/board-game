@@ -4,7 +4,7 @@
  */
 
 import { Server, Socket } from "socket.io";
-import { readFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { calcScore } from "../lib/scoring";
 import type {
@@ -12,10 +12,10 @@ import type {
   Player,
   Topic,
   OptionKey,
-  Phase,
   RoomView,
   ClientToServerEvents,
   ServerToClientEvents,
+  AddTopicPayload,
 } from "../lib/types";
 import {
   ROOM_ID_LENGTH,
@@ -24,6 +24,7 @@ import {
   BOARD_SIZE,
   DEFAULT_ROUNDS_SMALL,
   DEFAULT_ROUNDS_LARGE,
+  OPTION_KEYS,
 } from "../lib/types";
 
 // ============================================================
@@ -35,15 +36,16 @@ function loadTopics(): Topic[] {
   const raw = readFileSync(TOPICS_PATH, "utf-8");
   const data = JSON.parse(raw) as unknown[];
 
-  const REQUIRED_KEYS = ["A", "B", "C", "D", "E", "F", "G"] as const;
-
   return data.map((item, idx) => {
     const t = item as Record<string, unknown>;
     if (typeof t.id !== "string" || typeof t.question !== "string") {
       throw new Error(`topics.json[${idx}]: id と question は文字列必須`);
     }
+    if (typeof t.genre !== "string") {
+      throw new Error(`topics.json[${idx}]: genre は文字列必須`);
+    }
     const opts = t.options as Record<string, unknown>;
-    for (const key of REQUIRED_KEYS) {
+    for (const key of OPTION_KEYS) {
       if (typeof opts[key] !== "string") {
         throw new Error(`topics.json[${idx}]: options.${key} が不足`);
       }
@@ -52,14 +54,34 @@ function loadTopics(): Topic[] {
   });
 }
 
-const ALL_TOPICS: Topic[] = loadTopics();
+// 起動時に読み込み。インメモリで追加されたお題も含める
+let allTopics: Topic[] = loadTopics();
+
+/** 全ジャンル一覧を返す (重複排除・ソート済み) */
+function getAllGenres(): string[] {
+  return [...new Set(allTopics.map((t) => t.genre))].sort();
+}
+
+/** ジャンルでフィルタしたお題を返す (空配列=全部) */
+function getTopicsByGenres(genres: string[]): Topic[] {
+  if (genres.length === 0) return allTopics;
+  return allTopics.filter((t) => genres.includes(t.genre));
+}
+
+/** お題をファイルに永続化する */
+function saveTopics(): void {
+  try {
+    writeFileSync(TOPICS_PATH, JSON.stringify(allTopics, null, 2), "utf-8");
+  } catch (e) {
+    console.error("[topics] ファイル保存失敗:", e);
+  }
+}
 
 // ============================================================
 // 部屋管理 (インメモリ)
 // ============================================================
 const rooms = new Map<string, Room>();
 
-/** ランダムな6桁英数字IDを生成 */
 function generateRoomId(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let id = "";
@@ -69,30 +91,27 @@ function generateRoomId(): string {
   return id;
 }
 
-/** 重複しない部屋IDを生成 */
 function createUniqueRoomId(): string {
   let id: string;
-  do {
-    id = generateRoomId();
-  } while (rooms.has(id));
+  do { id = generateRoomId(); } while (rooms.has(id));
   return id;
 }
 
-/** 使われていないお題をランダムに1件返す */
-function pickTopic(usedIds: string[]): Topic | null {
-  const available = ALL_TOPICS.filter((t) => !usedIds.includes(t.id));
-  if (available.length === 0) return null;
-  return available[Math.floor(Math.random() * available.length)];
+/** 使われていないお題をジャンルフィルタ込みでランダムに1件返す */
+function pickTopic(usedIds: string[], selectedGenres: string[]): Topic | null {
+  const pool = getTopicsByGenres(selectedGenres).filter(
+    (t) => !usedIds.includes(t.id)
+  );
+  if (pool.length === 0) return null;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
-/** プレイヤーの現在の出題者インデックスの左隣から始まる公開順を生成 */
 function buildRevealOrder(room: Room): string[] {
   const { players, hostIndex } = room;
   const order: string[] = [];
   const n = players.length;
   for (let i = 1; i < n; i++) {
-    const idx = (hostIndex + i) % n;
-    order.push(players[idx].id);
+    order.push(players[(hostIndex + i) % n].id);
   }
   return order;
 }
@@ -108,7 +127,6 @@ function emitRoomState(
     const isHost = player.id === room.players[room.hostIndex]?.id;
     const view: RoomView = {
       ...room,
-      // 出題者本人のみ自分のランキングを見られる。その他は隠す
       hostRanking: isHost ? room.hostRanking : null,
       myId: player.id,
     };
@@ -116,12 +134,6 @@ function emitRoomState(
   }
 }
 
-/** ラウンド数を算出 (人数 × 1人当たり回数) */
-function calcMaxRounds(playerCount: number, roundsPerPlayer: number): number {
-  return playerCount * roundsPerPlayer;
-}
-
-/** ゲーム開始時のデフォルト出題回数 */
 function defaultRoundsPerPlayer(playerCount: number): number {
   return playerCount <= 4 ? DEFAULT_ROUNDS_SMALL : DEFAULT_ROUNDS_LARGE;
 }
@@ -133,12 +145,12 @@ export function registerSocketHandlers(
   io: Server<ClientToServerEvents, ServerToClientEvents>
 ): void {
   io.on("connection", (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
+
     // --------------------------------------------------------
     // 部屋の作成
     // --------------------------------------------------------
     socket.on("room:create", ({ name, color }) => {
       const roomId = createUniqueRoomId();
-
       const player: Player = {
         id: socket.id,
         name: name.trim().slice(0, 20) || "プレイヤー",
@@ -147,7 +159,6 @@ export function registerSocketHandlers(
         position: 0,
         hostCount: 0,
       };
-
       const room: Room = {
         roomId,
         players: [player],
@@ -163,8 +174,8 @@ export function registerSocketHandlers(
         roundsPerPlayer: 0,
         usedTopicIds: [],
         lastResults: null,
+        selectedGenres: [],
       };
-
       rooms.set(roomId, room);
       socket.join(roomId);
       emitRoomState(io, room);
@@ -187,32 +198,26 @@ export function registerSocketHandlers(
         socket.emit("room:error", { message: `部屋が満員です (最大 ${MAX_PLAYERS} 人)` });
         return;
       }
-
-      // 同じ名前重複チェック
-      const trimmedName = name.trim().slice(0, 20) || "プレイヤー";
-
       const player: Player = {
         id: socket.id,
-        name: trimmedName,
+        name: name.trim().slice(0, 20) || "プレイヤー",
         color,
         score: 0,
         position: 0,
         hostCount: 0,
       };
-
       room.players.push(player);
       socket.join(roomId);
       emitRoomState(io, room);
     });
 
     // --------------------------------------------------------
-    // ゲーム開始
+    // ゲーム開始 (ジャンル選択込み)
     // --------------------------------------------------------
-    socket.on("game:start", ({ roundsPerPlayer }) => {
+    socket.on("game:start", ({ roundsPerPlayer, selectedGenres }) => {
       const room = findRoomBySocket(socket.id);
       if (!room) return;
 
-      // ホスト(最初のプレイヤー)のみ操作可能
       if (room.players[0].id !== socket.id) {
         socket.emit("room:error", { message: "ゲーム開始はホストのみ操作できます" });
         return;
@@ -226,16 +231,24 @@ export function registerSocketHandlers(
         return;
       }
 
+      // 選択ジャンルが1つも対象お題を持たないケースを検出
+      const pool = getTopicsByGenres(selectedGenres);
+      if (pool.length === 0) {
+        socket.emit("room:error", { message: "選択したジャンルにお題がありません" });
+        return;
+      }
+
       const rpp = Math.max(1, Math.floor(roundsPerPlayer)) ||
         defaultRoundsPerPlayer(room.players.length);
 
+      room.selectedGenres = selectedGenres;
       room.roundsPerPlayer = rpp;
-      room.maxRounds = calcMaxRounds(room.players.length, rpp);
+      room.maxRounds = room.players.length * rpp;
       room.round = 1;
       room.hostIndex = 0;
       room.phase = "HOST_RANKING";
 
-      const topic = pickTopic(room.usedTopicIds);
+      const topic = pickTopic(room.usedTopicIds, room.selectedGenres);
       if (!topic) {
         socket.emit("room:error", { message: "使えるお題がありません" });
         return;
@@ -263,8 +276,6 @@ export function registerSocketHandlers(
         socket.emit("room:error", { message: "現在は順位入力フェーズではありません" });
         return;
       }
-
-      // 重複チェック
       if (new Set(ranking).size !== 3) {
         socket.emit("room:error", { message: "1〜3位は異なる選択肢にしてください" });
         return;
@@ -273,7 +284,6 @@ export function registerSocketHandlers(
       room.hostRanking = ranking;
       room.guesses = {};
       room.phase = "GUESSING";
-
       emitRoomState(io, room);
     });
 
@@ -288,14 +298,11 @@ export function registerSocketHandlers(
         socket.emit("room:error", { message: "現在は予想フェーズではありません" });
         return;
       }
-
       const host = room.players[room.hostIndex];
       if (socket.id === host.id) {
         socket.emit("room:error", { message: "出題者は予想できません" });
         return;
       }
-
-      // 重複チェック
       if (new Set(guess).size !== 3) {
         socket.emit("room:error", { message: "1〜3位は異なる選択肢にしてください" });
         return;
@@ -303,7 +310,6 @@ export function registerSocketHandlers(
 
       room.guesses[socket.id] = guess;
 
-      // 全員(出題者以外)が提出したか
       const nonHostPlayers = room.players.filter((p) => p.id !== host.id);
       const allSubmitted = nonHostPlayers.every((p) => room.guesses[p.id]);
 
@@ -312,12 +318,11 @@ export function registerSocketHandlers(
         room.revealOrder = buildRevealOrder(room);
         room.revealedCount = 0;
       }
-
       emitRoomState(io, room);
     });
 
     // --------------------------------------------------------
-    // 次の人の予想を公開 (誰でも操作可)
+    // 予想を1人ずつ公開
     // --------------------------------------------------------
     socket.on("reveal:next", () => {
       const room = findRoomBySocket(socket.id);
@@ -332,9 +337,7 @@ export function registerSocketHandlers(
         room.revealedCount++;
       }
 
-      // 全員分公開したら結果フェーズへ
       if (room.revealedCount >= room.revealOrder.length) {
-        // 得点計算
         const results: Room["lastResults"] = {};
         if (room.hostRanking) {
           for (const pid of room.revealOrder) {
@@ -345,7 +348,6 @@ export function registerSocketHandlers(
               const player = room.players.find((p) => p.id === pid);
               if (player) {
                 player.score += r.score;
-                // 盤面を進める (50マスループ)
                 player.position = (player.position + r.score) % BOARD_SIZE;
               }
             }
@@ -354,12 +356,11 @@ export function registerSocketHandlers(
         room.lastResults = results;
         room.phase = "ROUND_RESULT";
       }
-
       emitRoomState(io, room);
     });
 
     // --------------------------------------------------------
-    // 次のラウンドへ (誰でも操作可)
+    // 次のラウンドへ
     // --------------------------------------------------------
     socket.on("round:next", () => {
       const room = findRoomBySocket(socket.id);
@@ -370,14 +371,12 @@ export function registerSocketHandlers(
         return;
       }
 
-      // 全ラウンド終了判定
       if (room.round >= room.maxRounds) {
         room.phase = "GAME_END";
         emitRoomState(io, room);
         return;
       }
 
-      // 次のラウンドへ
       room.round++;
       room.hostIndex = (room.hostIndex + 1) % room.players.length;
       room.phase = "HOST_RANKING";
@@ -387,7 +386,7 @@ export function registerSocketHandlers(
       room.revealedCount = 0;
       room.lastResults = null;
 
-      const topic = pickTopic(room.usedTopicIds);
+      const topic = pickTopic(room.usedTopicIds, room.selectedGenres);
       if (!topic) {
         socket.emit("room:error", { message: "お題が不足しています。ゲームを終了します" });
         room.phase = "GAME_END";
@@ -397,8 +396,49 @@ export function registerSocketHandlers(
       room.currentTopic = topic;
       room.usedTopicIds.push(topic.id);
       room.players[room.hostIndex].hostCount++;
-
       emitRoomState(io, room);
+    });
+
+    // --------------------------------------------------------
+    // お題を追加 (誰でも追加可)
+    // --------------------------------------------------------
+    socket.on("topic:add", (payload: AddTopicPayload) => {
+      const { genre, question, options } = payload;
+
+      // バリデーション
+      if (!genre.trim() || !question.trim()) {
+        socket.emit("room:error", { message: "ジャンルと質問文は必須です" });
+        return;
+      }
+      for (const key of OPTION_KEYS) {
+        if (!options[key]?.trim()) {
+          socket.emit("room:error", { message: `選択肢 ${key} が空です` });
+          return;
+        }
+      }
+
+      const newTopic: Topic = {
+        id: `topic-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+        genre: genre.trim(),
+        question: question.trim(),
+        options: Object.fromEntries(
+          OPTION_KEYS.map((k) => [k, options[k].trim()])
+        ) as Record<OptionKey, string>,
+      };
+
+      allTopics.push(newTopic);
+      saveTopics();  // ファイルに永続化
+
+      socket.emit("topic:added", { topic: newTopic });
+      // 追加後にお題リストも更新配信
+      socket.emit("topics:data", { topics: allTopics, genres: getAllGenres() });
+    });
+
+    // --------------------------------------------------------
+    // お題一覧を返す
+    // --------------------------------------------------------
+    socket.on("topics:list", () => {
+      socket.emit("topics:data", { topics: allTopics, genres: getAllGenres() });
     });
 
     // --------------------------------------------------------
@@ -411,17 +451,13 @@ export function registerSocketHandlers(
 
         room.players.splice(idx, 1);
 
-        // 部屋が空になったら削除
         if (room.players.length === 0) {
           rooms.delete(roomId);
           return;
         }
-
-        // ゲーム中断 (WAITINGならそのまま継続)
         if (room.phase !== "WAITING") {
           room.phase = "GAME_END";
         }
-
         emitRoomState(io, room);
         return;
       }
@@ -429,12 +465,9 @@ export function registerSocketHandlers(
   });
 }
 
-/** socket.id から部屋を探す */
 function findRoomBySocket(socketId: string): Room | null {
   for (const room of rooms.values()) {
-    if (room.players.some((p) => p.id === socketId)) {
-      return room;
-    }
+    if (room.players.some((p) => p.id === socketId)) return room;
   }
   return null;
 }

@@ -4,18 +4,30 @@ import React, { useState } from "react";
 import { useSocket } from "./hooks/useSocket";
 import { PLAYER_COLORS } from "@/lib/types";
 import GameRoom from "./room/GameRoom";
+import { TopicManager } from "./components/TopicManager";
 
 type LobbyMode = "home" | "create" | "join";
 
 export default function HomePage() {
   // useSocket はここ1箇所だけで呼ぶ。GameRoom には props で渡す
   const socket = useSocket();
-  const { roomState, error, connected, createRoom, joinRoom, clearError } = socket;
+  const {
+    roomState,
+    error,
+    connected,
+    createRoom,
+    joinRoom,
+    clearError,
+    addTopic,
+    requestTopicsList,
+    topicsData,
+  } = socket;
 
   const [mode, setMode] = useState<LobbyMode>("home");
   const [name, setName] = useState("");
   const [color, setColor] = useState(PLAYER_COLORS[0].value);
   const [roomId, setRoomId] = useState("");
+  const [showTopicManager, setShowTopicManager] = useState(false);
 
   // roomState がある = 部屋に入っている → ゲーム画面へ
   if (roomState) {
@@ -29,6 +41,9 @@ export default function HomePage() {
         revealNext={socket.revealNext}
         nextRound={socket.nextRound}
         clearError={socket.clearError}
+        addTopic={socket.addTopic}
+        requestTopicsList={socket.requestTopicsList}
+        topicsData={socket.topicsData}
       />
     );
   }
@@ -98,6 +113,14 @@ export default function HomePage() {
                 className="w-full py-4 bg-white text-indigo-600 font-black text-lg rounded-xl border-2 border-indigo-300 hover:bg-indigo-50 active:scale-95 transition-all"
               >
                 🚪 部屋に参加する
+              </button>
+
+              {/* お題管理ボタン */}
+              <button
+                onClick={() => setShowTopicManager(true)}
+                className="w-full py-3 bg-amber-50 text-amber-700 font-bold text-sm rounded-xl border-2 border-amber-200 hover:bg-amber-100 active:scale-95 transition-all"
+              >
+                📋 お題を管理する
               </button>
 
               {/* ゲーム説明 */}
@@ -203,6 +226,16 @@ export default function HomePage() {
           )}
         </div>
       </div>
+
+      {/* お題管理モーダル */}
+      {showTopicManager && (
+        <TopicManager
+          topicsData={topicsData}
+          onAdd={addTopic}
+          onRequestList={requestTopicsList}
+          onClose={() => setShowTopicManager(false)}
+        />
+      )}
     </main>
   );
 }

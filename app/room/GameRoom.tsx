@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import type { UseSocketReturn } from "../hooks/useSocket";
 import { Board } from "../components/Board";
 import { PhaseIndicator } from "../components/PhaseIndicator";
+import { TopicManager } from "../components/TopicManager";
 import { WaitingPhase } from "../components/phases/WaitingPhase";
 import { HostRankingPhase } from "../components/phases/HostRankingPhase";
 import { GuessingPhase } from "../components/phases/GuessingPhase";
@@ -22,6 +23,9 @@ type Props = Pick<
   | "revealNext"
   | "nextRound"
   | "clearError"
+  | "addTopic"
+  | "requestTopicsList"
+  | "topicsData"
 >;
 
 export default function GameRoom({
@@ -33,13 +37,18 @@ export default function GameRoom({
   revealNext,
   nextRound,
   clearError,
+  addTopic,
+  requestTopicsList,
+  topicsData,
 }: Props) {
   const [boardOpen, setBoardOpen] = useState(true);
+  const [showTopicManager, setShowTopicManager] = useState(false);
 
   if (!roomState) return null;
 
   const room = roomState;
   const host = room.players[room.hostIndex];
+  const availableGenres = topicsData?.genres ?? [];
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -66,6 +75,16 @@ export default function GameRoom({
               </div>
             )}
           </div>
+
+          {/* お題管理ボタン (WAITING フェーズのみ表示) */}
+          {room.phase === "WAITING" && (
+            <button
+              onClick={() => setShowTopicManager(true)}
+              className="text-xs text-amber-600 font-bold bg-amber-50 border border-amber-200 rounded-lg px-2 py-1 hover:bg-amber-100 transition-colors flex-shrink-0"
+            >
+              📋 お題
+            </button>
+          )}
 
           {/* プレイヤー一覧ミニ表示 */}
           <div className="flex -space-x-1">
@@ -115,7 +134,11 @@ export default function GameRoom({
         {/* フェーズ別コンテンツ */}
         <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
           {room.phase === "WAITING" && (
-            <WaitingPhase room={room} onStart={startGame} />
+            <WaitingPhase
+              room={room}
+              onStart={startGame}
+              availableGenres={availableGenres}
+            />
           )}
           {room.phase === "HOST_RANKING" && (
             <HostRankingPhase room={room} onSubmitRanking={submitRanking} />
@@ -134,6 +157,16 @@ export default function GameRoom({
           )}
         </div>
       </div>
+
+      {/* お題管理モーダル */}
+      {showTopicManager && (
+        <TopicManager
+          topicsData={topicsData}
+          onAdd={addTopic}
+          onRequestList={requestTopicsList}
+          onClose={() => setShowTopicManager(false)}
+        />
+      )}
     </main>
   );
 }
