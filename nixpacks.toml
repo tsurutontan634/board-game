@@ -8,4 +8,4 @@ cmds = ["npm install -g pnpm@9 && pnpm install"]
 cmds = ["pnpm build"]
 
 [start]
-cmd = "pnpm start"
+cmd = "node_modules/.bin/tsx server.ts"
