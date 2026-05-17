@@ -58,39 +58,46 @@ export function HostRankingPhase({ room, onSubmitRanking }: Props) {
     );
   }
 
-  // 他のプレイヤー
+  // 他のプレイヤー: お題を表示しつつ待機
   return (
     <div className="space-y-4">
-      {/* 出題者情報 */}
+      {/* 出題者情報 + 考え中バッジ */}
       <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-3">
         <div
-          className="w-5 h-5 rounded-full flex-shrink-0"
+          className="w-5 h-5 rounded-full flex-shrink-0 border-2 border-white shadow"
           style={{ backgroundColor: host.color }}
         />
-        <span className="font-bold text-amber-800">
-          {host.name} が出題者です
-        </span>
-      </div>
-
-      {/* 待機アニメーション */}
-      <div className="flex flex-col items-center justify-center py-10 text-gray-500 space-y-3">
-        <div className="flex gap-2">
+        <span className="font-bold text-amber-800 flex-1">{host.name} が考え中...</span>
+        <div className="flex gap-1">
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="w-3 h-3 bg-indigo-400 rounded-full animate-bounce"
+              className="w-2 h-2 bg-amber-400 rounded-full animate-bounce"
               style={{ animationDelay: `${i * 0.15}s` }}
             />
           ))}
         </div>
-        <p className="font-medium text-gray-600">
-          <span className="font-bold text-indigo-600">{host.name}</span>
-          が考え中...
-        </p>
-        <p className="text-sm text-gray-400">
-          1〜3位の順位を選んでいます
-        </p>
       </div>
+
+      {/* お題カード (回答者にも見える) */}
+      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl p-5 shadow-xl">
+        <p className="text-xs font-medium opacity-80 mb-2">📋 お題</p>
+        <p className="text-xl font-black">{topic.question}</p>
+      </div>
+
+      {/* 選択肢一覧 */}
+      <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+        {OPTION_KEYS.map((key) => (
+          <div key={key} className="flex gap-2 items-start text-sm">
+            <span className="font-black text-indigo-600 w-5 flex-shrink-0">{key}</span>
+            <span className="text-gray-700">{topic.options[key]}</span>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-center text-sm text-gray-400">
+        {host.name} が1〜3位を選んでいます。予想しておこう！
+      </p>
     </div>
   );
 }

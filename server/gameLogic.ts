@@ -371,11 +371,14 @@ export function registerSocketHandlers(
         return;
       }
 
-      if (room.revealedCount < room.revealOrder.length) {
-        room.revealedCount++;
-      }
+      // revealedCount をインクリメント
+      // 0〜length-1 : 回答者を1人ずつ公開
+      // length      : 出題者の正解を公開 (クライアントに hostRanking が見える状態)
+      // length+1以上: ここには来ない (遷移済み)
+      room.revealedCount++;
 
-      if (room.revealedCount >= room.revealOrder.length) {
+      if (room.revealedCount > room.revealOrder.length) {
+        // 出題者正解めくり後 → 採点して ROUND_RESULT へ
         const results: Room["lastResults"] = {};
         if (room.hostRanking) {
           for (const pid of room.revealOrder) {
@@ -394,6 +397,8 @@ export function registerSocketHandlers(
         room.lastResults = results;
         room.phase = "ROUND_RESULT";
       }
+      // revealedCount === revealOrder.length のとき:
+      // 全回答者公開済み・正解めくり待ち → そのまま emit して UI に反映
       emitRoomState(io, room);
     });
 
