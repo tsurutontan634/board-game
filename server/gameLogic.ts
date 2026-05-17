@@ -155,11 +155,18 @@ function emitRoomState(
   io: Server<ClientToServerEvents, ServerToClientEvents>,
   room: Room
 ): void {
+  // REVEALING フェーズで正解めくり済み（revealedCount > revealOrder.length）、
+  // または ROUND_RESULT フェーズでは全プレイヤーに hostRanking を公開する
+  const shouldRevealToAll =
+    (room.phase === "REVEALING" &&
+      room.revealedCount > room.revealOrder.length) ||
+    room.phase === "ROUND_RESULT";
+
   for (const player of room.players) {
     const isHost = player.id === room.players[room.hostIndex]?.id;
     const view: RoomView = {
       ...room,
-      hostRanking: isHost ? room.hostRanking : null,
+      hostRanking: isHost || shouldRevealToAll ? room.hostRanking : null,
       myId: player.id,
     };
     io.to(player.id).emit("room:state", view);

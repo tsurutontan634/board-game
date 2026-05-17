@@ -20,7 +20,9 @@ export function RevealingPhase({ room, onRevealNext }: Props) {
   // revealedCount は「回答者の公開数」
   // 全回答者を公開し終えた後、さらに +1 で「出題者の正解」を公開する
   const allGuessesRevealed = revealedCount >= revealOrder.length;
-  const hostAnswerRevealed = revealedCount > revealOrder.length; // サーバーは >length で ROUND_RESULT へ遷移
+  // サーバーが hostRanking を送ってきた（非null）ことを正解公開済みの判定とする
+  // （emitRoomState が REVEALING+revealedCount>length のとき全員に送信するため）
+  const hostAnswerRevealed = hostRanking !== null;
   const showHostReveal     = allGuessesRevealed && !hostAnswerRevealed;
 
   // (nextRevealId / nextPlayer はリスト内インライン判定で使うため不要)
@@ -171,13 +173,10 @@ export function RevealingPhase({ room, onRevealNext }: Props) {
         </div>
       </div>
 
-      {/* 選択肢一覧（照らし合わせ用） */}
-      <details className="bg-gray-50 rounded-xl border border-gray-200">
-        <summary className="px-4 py-3 text-sm font-medium text-gray-600 cursor-pointer select-none list-none flex items-center justify-between">
-          <span>📖 選択肢を確認する</span>
-          <span className="text-gray-400">▾</span>
-        </summary>
-        <div className="px-4 pb-3 space-y-1.5 border-t border-gray-100 pt-3">
+      {/* 選択肢一覧（常時表示） */}
+      <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+        <p className="text-xs font-medium text-gray-500 mb-2">📖 選択肢</p>
+        <div className="space-y-1.5">
           {OPTION_KEYS.filter((k) => topic.options[k]?.trim()).map((key) => (
             <div key={key} className="flex gap-2 items-start text-sm">
               <span className="font-black text-indigo-600 w-5 flex-shrink-0">{key}</span>
@@ -185,7 +184,7 @@ export function RevealingPhase({ room, onRevealNext }: Props) {
             </div>
           ))}
         </div>
-      </details>
+      </div>
     </div>
   );
 }
