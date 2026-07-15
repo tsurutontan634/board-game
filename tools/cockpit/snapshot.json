@@ -1,0 +1,2393 @@
+{
+ "generatedAt": "2026-07-15",
+ "workspace": "つるとんたんさんのNotion",
+ "tasks": [
+  {
+   "task": "TSS8/9イベント：告知・集客（5〜10名目標）",
+   "project": "WE",
+   "type": "仕事",
+   "priority": "できれば",
+   "status": "未着手",
+   "due": "2026-08-09",
+   "note": "渡邉さんからの依頼（7/8メール）。広報URL: https://we-tss.peatix.com/view",
+   "url": "https://app.notion.com/p/39caf155527181b5a042c77d3e95bbb9"
+  },
+  {
+   "task": "TSS8/9イベント：Peatix申込状況の定期チェック・共有",
+   "project": "WE",
+   "type": "仕事",
+   "priority": "できれば",
+   "status": "未着手",
+   "due": "2026-08-09",
+   "note": "まずPeatixグループをフォローして共同管理者になる必要あり",
+   "url": "https://app.notion.com/p/39caf155527181939388d7e33a9b0288"
+  },
+  {
+   "task": "TSS8/9イベント：参加者コメントを集約し開発チームへ共有",
+   "project": "WE",
+   "type": "仕事",
+   "priority": "できれば",
+   "status": "未着手",
+   "due": "2026-08-10",
+   "note": "イベント後、参加者の意見・反応を濱田さん・牧さんに共有",
+   "url": "https://app.notion.com/p/39caf15552718111b0acf2abb97023a4"
+  }
+ ],
+ "writings": [
+  {
+   "title": "マージナルマン — 理想に近づくほど、居場所が消えていく",
+   "genres": [
+    "自己分析",
+    "過去",
+    "人間関係"
+   ],
+   "status": "テーマのみ",
+   "chars": 0,
+   "updated": "2026-07-15",
+   "url": "https://app.notion.com/39eaf155527181c7b54bc25e5f62a4e2"
+  },
+  {
+   "title": "どこに向かってる人生か",
+   "genres": [
+    "自己分析"
+   ],
+   "status": "完了",
+   "chars": 2344,
+   "updated": "2026-06-20",
+   "url": "https://app.notion.com/24eaf1555271802c8623caf4c93dedb2"
+  },
+  {
+   "title": "結婚できない男",
+   "genres": [
+    "結婚",
+    "自己分析"
+   ],
+   "status": "進行中",
+   "chars": 1184,
+   "updated": "2026-06-06",
+   "url": "https://app.notion.com/254af15552718019a99fcff1eb0acc27"
+  },
+  {
+   "title": "世界・他人と対する自分",
+   "genres": [
+    "自己分析",
+    "就職"
+   ],
+   "status": "進行中",
+   "chars": 1506,
+   "updated": "2026-05-29",
+   "url": "https://app.notion.com/254af1555271800d86d3db4d299b2135"
+  },
+  {
+   "title": "芦谷さん会合まとめ",
+   "genres": [],
+   "status": "テーマのみ",
+   "chars": 3222,
+   "updated": "2026-05-29",
+   "url": "https://app.notion.com/2caaf1555271804180b7d4c87ff0784c"
+  },
+  {
+   "title": "妥協・諦め",
+   "genres": [],
+   "status": "進行中",
+   "chars": 724,
+   "updated": "2026-02-16",
+   "url": "https://app.notion.com/250af155527180158778d94fe51aa1ff"
+  },
+  {
+   "title": "妥協と選択",
+   "genres": [],
+   "status": "進行中",
+   "chars": 953,
+   "updated": "2026-02-16",
+   "url": "https://app.notion.com/26caf155527180b9a476c542b8630fdd"
+  }
+ ],
+ "inbox": [
+  {
+   "title": "東北旅行のプランニング",
+   "source": "個人の思考",
+   "project": "趣味・生活",
+   "tags": [],
+   "status": "未整理",
+   "read": false,
+   "link": "",
+   "date": "2026-07-15T09:02:00.000Z",
+   "url": "https://app.notion.com/p/39eaf15552718181af2cf690729528d8"
+  },
+  {
+   "title": "Bainにメール（なるはや）",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [],
+   "status": "未整理",
+   "read": false,
+   "link": "",
+   "date": "2026-07-15T09:02:00.000Z",
+   "url": "https://app.notion.com/p/39eaf1555271818fb91fddf8bfd273d2"
+  },
+  {
+   "title": "コンサル本をジョブ練習までに読む",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [],
+   "status": "未整理",
+   "read": false,
+   "link": "",
+   "date": "2026-07-15T09:03:00.000Z",
+   "url": "https://app.notion.com/p/39eaf155527181d1b2aff393250d775b"
+  },
+  {
+   "title": "GOALOOK給与振込 今日まで",
+   "source": "個人の思考",
+   "project": "GOALOOK",
+   "tags": [],
+   "status": "未整理",
+   "read": false,
+   "link": "",
+   "date": "2026-07-15T09:03:00.000Z",
+   "url": "https://app.notion.com/p/39eaf155527181d8bbb1c22bb6ee6e89"
+  },
+  {
+   "title": "公庫について調べる",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [],
+   "status": "未整理",
+   "read": false,
+   "link": "",
+   "date": "2026-07-15T09:03:00.000Z",
+   "url": "https://app.notion.com/p/39eaf155527181dfbd7be13e79b1c918"
+  },
+  {
+   "title": "人を助けるための実力と、目の前を救う『偽善』のジレンマ",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2026-07-14",
+   "url": "https://app.notion.com/p/39daf155527181848df9d6a72e7c9100"
+  },
+  {
+   "title": "【徒然・テーマ集】キャリア・目標設定、比較からの脱却、発信・オンリーワン戦略",
+   "source": "LINE",
+   "project": null,
+   "tags": [
+    "思想",
+    "キャリア・人生設計",
+    "発信・ブランディング"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718102b013d6df2fa871cc"
+  },
+  {
+   "title": "【徒然・テーマ集】承認欲求、自己肯定感、演じること、プラグマティズムと自己欺瞞",
+   "source": "LINE",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181c0a1cfff1925fd1fab"
+  },
+  {
+   "title": "【徒然・テーマ集】過去の自分を救いたい、教育観、強者の理論",
+   "source": "LINE",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271811fa132e981f1ec00c0"
+  },
+  {
+   "title": "【徒然・テーマ集】マージナルマン、環境が自分を形作る、過去の人間関係＝自分の軌跡",
+   "source": "LINE",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718130a546ef2b99e17522"
+  },
+  {
+   "title": "2025年12月の日記ダイジェスト（創作・発信計画の具体化・後継への諦め・花川さん論）",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史",
+    "キャリア・人生設計",
+    "発信・ブランディング"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2025-12-03",
+   "url": "https://app.notion.com/p/39daf15552718150af84db62cc0b66f6"
+  },
+  {
+   "title": "2025年11月の日記ダイジェスト（思想ファンド構想・マージナルマン自認・キャリア設計）",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史",
+    "キャリア・人生設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2025-11-01",
+   "url": "https://app.notion.com/p/39daf155527181e2aa4defb0ff725211"
+  },
+  {
+   "title": "2025年8月の日記ダイジェスト（塾・承認欲求・神保）",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2025-08-07",
+   "url": "https://app.notion.com/p/39daf1555271817b9ed9ced952a1a6ef"
+  },
+  {
+   "title": "2025年9月の日記ダイジェスト（prism営業・神園起業構想・自己欺瞞への直面）",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史",
+    "キャリア・人生設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2025-09-01",
+   "url": "https://app.notion.com/p/39daf155527181898b58c64964e97829"
+  },
+  {
+   "title": "2025年10月の日記ダイジェスト（習慣化メソッド確立・北海道・人生の指針）",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史",
+    "習慣・時間設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2025-10-01",
+   "url": "https://app.notion.com/p/39daf155527181f18dd4f2e7b0170111"
+  },
+  {
+   "title": "2023 オーストラリア遠征記（探検部・ステップ100km徒歩企画）",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2023-02-26",
+   "url": "https://app.notion.com/p/39daf155527181b8b577e72c975593c4"
+  },
+  {
+   "title": "Claude Codeでnoteを「全自動」運用【プロンプト全公開】",
+   "source": "Twitter",
+   "project": null,
+   "tags": [
+    "AI活用",
+    "発信・ブランディング"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://x.com/rimuruafi/status/2076705043013877766",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718142ba93fe8ca16a58d3"
+  },
+  {
+   "title": "【保存版】Claude Codeへの\"毎回指示\"はオワコン「自走設計」のススメ",
+   "source": "Twitter",
+   "project": null,
+   "tags": [
+    "AI活用",
+    "学び"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://x.com/swarm_japan/status/2074607688257057121",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181718303eb8efab242a0"
+  },
+  {
+   "title": "Claude Codeで日常タスク45個を自動化した解説記事（東大院生）",
+   "source": "Twitter",
+   "project": null,
+   "tags": [
+    "AI活用",
+    "学び"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://x.com/SuguruKun_ai/status/2076249048944972202",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181d8996bca84fe42dd7d"
+  },
+  {
+   "title": "全経営者が補助金に向き合える仕組み（@taichiyanojp）",
+   "source": "Twitter",
+   "project": null,
+   "tags": [
+    "学び",
+    "仕事"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://x.com/taichiyanojp/status/2076886374872178806",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181b1a988ca09add236ab"
+  },
+  {
+   "title": "自分の傷を癒せていない人ほど他人を救う側に回る（@xynoa__）",
+   "source": "Twitter",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://x.com/xynoa__/status/2076273690266980539",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181e29cdef5e109d9aeb1"
+  },
+  {
+   "title": "AI研修の助成金（人材開発支援助成金・リスキリング支援コース）",
+   "source": "Twitter",
+   "project": null,
+   "tags": [
+    "学び",
+    "仕事"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://x.com/isle_ai_biz/status/2076488012347899989",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718103a6e2fec5b9eb825b"
+  },
+  {
+   "title": "02-26 インタビュー準備：土屋武蔵さんの学習塾運営と社会起業家精神",
+   "source": "個人の思考",
+   "project": "GOALOOK",
+   "tags": [
+    "記録",
+    "思想",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181cab0d7f860afaf6bdb"
+  },
+  {
+   "title": "02-06 回想記録：土屋武蔵さんの高校中退・独学受験・京都大学合格",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181e1b86bed499305eb99"
+  },
+  {
+   "title": "02-06 インタビュー：土屋武蔵氏の半生と自己形成",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "記録",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://docs.google.com/spreadsheets/d/1yupCUpxB6PkpHdAwoPhWCZMVYurGjITqgZgSxjqdcJU/edit",
+   "date": "2026-02-06",
+   "url": "https://app.notion.com/p/39daf1555271813486baf28f416086a3"
+  },
+  {
+   "title": "02-19 体験記録：土屋武蔵さんのオーストラリア徒歩企画と挫折体験",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "記録",
+    "思想",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181aa8550cca44969c9b2"
+  },
+  {
+   "title": "03-18 内省記録：居場所・一途な愛・幸せな家庭",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "人間関係・恋愛"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181b38de5fc27c772eadd"
+  },
+  {
+   "title": "03-12 音声メモ：土屋武蔵のアイデンティティ模索とAI活用・生活設計",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271814a95dee80b34cb38e6"
+  },
+  {
+   "title": "04-12 事業構想：学生の専門性可視化と教育・採用マッチングエコシステム",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "アイデア"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718137ba1ee20cd3925779"
+  },
+  {
+   "title": "03-19 内省記録: 焦燥感と人生の経営戦略",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "キャリア・人生設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181bdbc90eeca475a7f54"
+  },
+  {
+   "title": "03-24 生活設計記録：2026年4月以降の時間配分とAI秘書活用",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "習慣・時間設計",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271816096bfc271f41d5fa0"
+  },
+  {
+   "title": "03-24 内省記録: AIによる自己管理と習慣化設計",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "習慣・時間設計",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271812d8584fea649b2db08"
+  },
+  {
+   "title": "02-16 内省記録：土屋武蔵のAI自己分析と人生の目的探求",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718146aa5cc4b5798a428b"
+  },
+  {
+   "title": "03-18 内省記録：人間関係における代替不可能性と特別さ",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "人間関係・恋愛"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271816ab39acc667308fac9"
+  },
+  {
+   "title": "03-18 対話記録：土屋武蔵の結婚観と安心できるパートナー像",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "人間関係・恋愛"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181d095e3c3ee439aa2d3"
+  },
+  {
+   "title": "02-15 思考記録：IQ・ギフテッド性と精神的成熟・社会的賢さ",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181398397ec8a5e541681"
+  },
+  {
+   "title": "03-19 内省記録：一人旅と自然の中での回復感",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718122ab32c36befc83504"
+  },
+  {
+   "title": "03-18 読書記録：『人生の経営戦略』とウェルビーイング・人生設計",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "学び",
+    "思想",
+    "キャリア・人生設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718120bd5cc8ba8775677e"
+  },
+  {
+   "title": "03-15 思考記録：努力観・現実逃避観と選ばれる人材へのキャリア戦略",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "キャリア・人生設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718140924be063e12f824f"
+  },
+  {
+   "title": "03-13 内省記録：時間設計とAI・発信・読書の優先順位",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "習慣・時間設計",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271812f8679c04e2e1958a1"
+  },
+  {
+   "title": "02-19 内省記録：デジタルツインと自己像の補正",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181aeba29d10b869320f5"
+  },
+  {
+   "title": "02-14 内省記録：優秀さ・見下し・フェアな評価",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718188bda3e8ea8ae32298"
+  },
+  {
+   "title": "02-13 内省記録：発信設計と自己ブランディング",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "アイデア",
+    "発信・ブランディング"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181eb8b1fe1289203cb8a"
+  },
+  {
+   "title": "02-13 内省記録：結果・実力・才能と努力の評価基準",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181c290a6dce26630e123"
+  },
+  {
+   "title": "02-07 内省記録：土屋武蔵の評価構造と認知の癖",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181d5898fdde5cdb3518e"
+  },
+  {
+   "title": "02-12 内省記録：自己肯定感と人生の美学、経験発信",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "発信・ブランディング"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181b0a040f265814c9bc8"
+  },
+  {
+   "title": "02-07 内省記録：土屋武蔵さんの飲み会嫌いと価値観・対人観",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "人間関係・恋愛"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271819a8632da4cff46c1a5"
+  },
+  {
+   "title": "02-06 自己分析：土屋武蔵氏のギフテッド観と能力認識",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181339e54f2ccf58ac027"
+  },
+  {
+   "title": "02-07 自己分析記録：土屋武蔵さんのInstagramを持たない理由",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "発信・ブランディング"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718190af7fc6df51176aef"
+  },
+  {
+   "title": "01-21 内省記録：土屋武蔵さんの能力認識とキャリア設計",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観",
+    "キャリア・人生設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181ec9e12fd45524a29c9"
+  },
+  {
+   "title": "02-04 ブレスト記録：2024年にやりたいこととAI活用",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "アイデア",
+    "思想",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718159b243e12d6869a0ac"
+  },
+  {
+   "title": "01-29 思考メモ：ギフテッド教育と行動・実績への価値観",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181b3ac37cedd21912988"
+  },
+  {
+   "title": "02-04 独白：2026年の目標設定と自由時間の使い方",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "キャリア・人生設計",
+    "習慣・時間設計"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181c389dfd6f7ea5a97c9"
+  },
+  {
+   "title": "01-29 自己分析：自信のなさと努力・成長の源泉",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181b0aed3cacb96f012ff"
+  },
+  {
+   "title": "01-21 思考整理: 録音による思考蓄積・幸福論・仮説思考とAI活用",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718157990fe33488229869"
+  },
+  {
+   "title": "01-17 内省記録: 優秀さと勝てる土俵の模索",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718123833fce4aa8ab859e"
+  },
+  {
+   "title": "01-19 思考記録：知識・経験の量と接続モデル",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181068662f766a21cea42"
+  },
+  {
+   "title": "01-18 内省記録：目的意識の欠如と他者比較による挫折感",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf15552718193beb8dee65ceb11ad"
+  },
+  {
+   "title": "01-19 内省記録：優秀さ・アウトプット・自己能力の使いこなし",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181e39df9f96ad913f54c"
+  },
+  {
+   "title": "01-17 内省記録：土屋武蔵さんの弱さ・インプット不足・努力習慣",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181e99619f7367bccdfa7"
+  },
+  {
+   "title": "01-17 インタビュー：土屋武蔵氏の中学時代 - 自己認識と友情",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "記録",
+    "自分史"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://docs.google.com/spreadsheets/d/1yupCUpxB6PkpHdAwoPhWCZMVYurGjITqgZgSxjqdcJU/edit",
+   "date": "2026-01-17",
+   "url": "https://app.notion.com/p/39daf15552718141aec7c66b69bd9d00"
+  },
+  {
+   "title": "01-16 思考メモ：レスバ・論理・賢さの評価基準",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "能力・才能観"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181f2a73ffd38d64d8485"
+  },
+  {
+   "title": "01-16 構想メモ：AIによる思考クローン化と自己ブランディング",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "アイデア",
+    "思想",
+    "発信・ブランディング",
+    "AI活用"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271818ba256d967d18c4d61"
+  },
+  {
+   "title": "01-11 思考記録：早朝の感覚と診断ラベルへの違和感",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf155527181bda9e7e667840609f0"
+  },
+  {
+   "title": "01-11 独白記録：早起き、体調不良、診断ラベルへの違和感",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271818bac66f53de3ce9c69"
+  },
+  {
+   "title": "02-14 石川氏の事業戦略報告と、庄司氏を中心とした新たな事業構想への転換",
+   "source": "会議",
+   "project": "GOALOOK",
+   "tags": [
+    "仕事",
+    "アイデア"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://docs.google.com/spreadsheets/d/1yupCUpxB6PkpHdAwoPhWCZMVYurGjITqgZgSxjqdcJU/edit",
+   "date": "2026-02-14",
+   "url": "https://app.notion.com/p/39daf155527181cdb287d3bdd5e6106a"
+  },
+  {
+   "title": "02-15 庄司氏を中心とした社会貢献コミュニティ創設構想",
+   "source": "個人の思考",
+   "project": "スモビジ",
+   "tags": [
+    "アイデア",
+    "仕事"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://docs.google.com/spreadsheets/d/1yupCUpxB6PkpHdAwoPhWCZMVYurGjITqgZgSxjqdcJU/edit",
+   "date": "2026-02-15",
+   "url": "https://app.notion.com/p/39daf1555271817aab6aef0a3a0eaa53"
+  },
+  {
+   "title": "02-12 大学1回生の回顧：期待、依存、喪失、そして再起",
+   "source": "個人の思考",
+   "project": "大学",
+   "tags": [
+    "思想",
+    "記録",
+    "自分史",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://docs.google.com/spreadsheets/d/1yupCUpxB6PkpHdAwoPhWCZMVYurGjITqgZgSxjqdcJU/edit",
+   "date": "2026-02-12",
+   "url": "https://app.notion.com/p/39daf155527181e8ab6ee1e63eafd453"
+  },
+  {
+   "title": "02-13 発信活動における自己分析と戦略立案の構想",
+   "source": "個人の思考",
+   "project": "スモビジ",
+   "tags": [
+    "思想",
+    "アイデア",
+    "発信・ブランディング",
+    "自己分析"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://docs.google.com/spreadsheets/d/1yupCUpxB6PkpHdAwoPhWCZMVYurGjITqgZgSxjqdcJU/edit",
+   "date": "2026-02-13",
+   "url": "https://app.notion.com/p/39daf155527181808a77c6e8eae03f48"
+  },
+  {
+   "title": "02-14 講義: スモールビジネスの成功法則",
+   "source": "その他",
+   "project": "自己投資・学び",
+   "tags": [
+    "学び"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "https://docs.google.com/spreadsheets/d/1yupCUpxB6PkpHdAwoPhWCZMVYurGjITqgZgSxjqdcJU/edit",
+   "date": "2026-02-14",
+   "url": "https://app.notion.com/p/39daf155527181afb603e94d6e2018eb"
+  },
+  {
+   "title": "07-12 面接: 広告代理店 - 応募者",
+   "source": "会議",
+   "project": null,
+   "tags": [
+    "記録"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": null,
+   "url": "https://app.notion.com/p/39daf1555271818faa91f2ff91a3e57f"
+  },
+  {
+   "title": "金曜日までにスタートアップエコシステムのレポート作成",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "仕事"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2026-07-14",
+   "url": "https://app.notion.com/p/39caf1555271815cbe1cead6a5d4cc7d"
+  },
+  {
+   "title": "Claude Codeで執筆システムを組み上げる",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "仕事",
+    "アイデア"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2026-07-14",
+   "url": "https://app.notion.com/p/39caf1555271819d8e40faa164b5b2d0"
+  },
+  {
+   "title": "信頼と甘さ・弱さの違いについて",
+   "source": "個人の思考",
+   "project": null,
+   "tags": [
+    "思想"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2026-07-14",
+   "url": "https://app.notion.com/p/39caf155527181c5b7f7f8a5f3f9856a"
+  },
+  {
+   "title": "16日までにさくちゃんのメンタリング準備",
+   "source": "個人の思考",
+   "project": "GAP",
+   "tags": [
+    "仕事"
+   ],
+   "status": "整理済み",
+   "read": false,
+   "link": "",
+   "date": "2026-07-14",
+   "url": "https://app.notion.com/p/39caf155527181c98e6df79031e817ef"
+  }
+ ],
+ "books": [
+  {
+   "title": "イシュー思考",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "ストーリーとしての競争戦略",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "プロだけが知っている小説の書き方",
+   "genres": [
+    "創作"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "「頭」を使える良問",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "低",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "ゲーム理論の思考法",
+   "genres": [
+    "行動経済学"
+   ],
+   "priority": "中",
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "考える技術・書く技術",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "マスト",
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "道具としてのファイナンス",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": "中",
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "起業のエクイティファイナンス",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "企業価値評価 第7版 上下巻",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "不幸にする親",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "人生のレールを外れる衝動の見つけ方",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "読了",
+   "bought": true,
+   "rating": 4,
+   "finished": "2026-07-15"
+  },
+  {
+   "title": "1億総ガキ社会",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "いたいコンサル すごいコンサル 究極の参謀を見抜く「10の質問」 (日経ビジネス人文庫)",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "戦略コンサルのトップ5％だけに見えている世界",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "戦略コンサルの技術 70のスキームで身につける思考と分析力",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "マスト",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "コンサルティング会社サバイバルマニュアル",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "暇と退屈の倫理学",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "毒になる親",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "現代思想入門",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "hard things",
+   "genres": [
+    "起業",
+    "思想"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "ざっくりわかるファイナンス",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "読了",
+   "bought": true,
+   "rating": null,
+   "finished": "2025-12-01"
+  },
+  {
+   "title": "コンサルタント3年目までの必修ビジネススキル キャリアを踏破するためのサバイバルマップ",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "財務3表一体理解法",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "読了",
+   "bought": true,
+   "rating": null,
+   "finished": "2025-12-01"
+  },
+  {
+   "title": "外資系コンサルのリサーチ技法",
+   "genres": [
+    "コンサル",
+    "ハードスキル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "プラグマティズム (岩波文庫)",
+   "genres": [
+    "新書",
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "君は戦略を立てることができるか 視点と考え方を実感する４時間",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "財務諸表の見方",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": "高",
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "ゲーム理論の裏口入門",
+   "genres": [
+    "行動経済学"
+   ],
+   "priority": "中",
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "コーポレートファイナンス 戦略と実践",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "外資系金融のExcel作成術",
+   "genres": [
+    "ハードスキル",
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "話を聞かない男、地図が読めない女",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "超バカの壁",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "論点を研ぐ　戦略コンサルタントが明かす「問題解決」の実際",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "戦略策定概論",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "BCG経営コンセプト　市場創造",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "バカの壁",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "言語化のための小説思考",
+   "genres": [
+    "創作"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "読了",
+   "bought": true,
+   "rating": 4,
+   "finished": "2025-11-30"
+  },
+  {
+   "title": "プラグマティズム入門 (ちくま新書 1165)",
+   "genres": [
+    "新書",
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "戦略思考コンプリートブック",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "MBAの経営戦略が10時間でざっと学べる",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "問題解決プロフェッショナル",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "はじめて学ぶ会計ファイナンス",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "問いのデザイン: 創造的対話のファシリテーション",
+   "genres": [
+    "ビジネス書"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "増補改訂版 起業のエクイティ・ファイナンス",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "推論の技術",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "一橋MBA戦略ケースブック",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "コンサルを超える問題解決と価値創造の全技法",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "言ってはいけない",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "起業の科学",
+   "genres": [
+    "起業"
+   ],
+   "priority": "低",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "経営参謀が明かす 論理思考と発想の技術",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "サラリーマンは300万円で小さな会社を買いなさい",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "行動経済学が最強の学問である",
+   "genres": [
+    "行動経済学"
+   ],
+   "priority": "高",
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "良い戦略・悪い戦略",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "絶対に忘れない財務指標の覚え方",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "考える技術",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "エッセイの書き方",
+   "genres": [
+    "創作"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "プロフェッショナリズムと問題解決の実践",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "脳の闇",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "BCG戦略コンセプト",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "予想通りに不合理",
+   "genres": [
+    "行動経済学"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "コンサルゼロ年目の教科書",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "目的への抵抗",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "読了",
+   "bought": true,
+   "rating": 3,
+   "finished": "2026-07-15"
+  },
+  {
+   "title": "フレームワークを使いこなすための50問",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "仮説行動――マップ・ループ・リープで学びを最大化し、大胆な未来を実現する",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "読みたいことを、書けばいい。",
+   "genres": [
+    "創作"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "読了",
+   "bought": true,
+   "rating": 4,
+   "finished": "2025-12-02"
+  },
+  {
+   "title": "BCG経営コンセプト　構造改革",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "戦略思考トレーニング",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "起業のファイナンス",
+   "genres": [
+    "ファイナンス"
+   ],
+   "priority": "中",
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "ロジカルシンキング",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": "kindle",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "Zero to one",
+   "genres": [
+    "起業"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "論破という病",
+   "genres": [
+    "新書"
+   ],
+   "priority": null,
+   "medium": "本",
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "思考・論理・分析",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": null,
+   "status": "読了",
+   "bought": true,
+   "rating": 5,
+   "finished": "2025-12-06"
+  },
+  {
+   "title": "SAVE THE CAT",
+   "genres": [
+    "創作"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "AX戦略",
+   "genres": [
+    "コンサル",
+    "ベイン指定"
+   ],
+   "priority": "高",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "ネットプロモーター経営",
+   "genres": [
+    "ベイン指定",
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "会計の基本",
+   "genres": [
+    "ベイン指定",
+    "ファイナンス"
+   ],
+   "priority": "中",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "最新ビジネスマナー",
+   "genres": [
+    "ベイン指定",
+    "ビジネス書"
+   ],
+   "priority": "中",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "日本企業復活の戦略",
+   "genres": [
+    "ベイン指定",
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "Time talent energy",
+   "genres": [
+    "ベイン指定",
+    "コンサル"
+   ],
+   "priority": "高",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "寄付白書",
+   "genres": [
+    "WE"
+   ],
+   "priority": "マスト",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "最強M＆A",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～政治学",
+   "genres": [
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "起業の科学ver2",
+   "genres": [
+    "起業"
+   ],
+   "priority": "高",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～統計学",
+   "genres": [
+    "教養"
+   ],
+   "priority": "中",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～金融学",
+   "genres": [
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "（無題）",
+   "genres": [],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～マーケティング",
+   "genres": [
+    "教養"
+   ],
+   "priority": "低",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～社会学",
+   "genres": [
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "日本の寄付を科学する",
+   "genres": [
+    "WE"
+   ],
+   "priority": "マスト",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "意思決定のための分析の技術",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": "マスト",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "コア事業進化論",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～データサイエンス",
+   "genres": [
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～経済",
+   "genres": [
+    "教養"
+   ],
+   "priority": "低",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "マッキンゼー価値を作る",
+   "genres": [
+    "コンサル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～経営学",
+   "genres": [
+    "教養"
+   ],
+   "priority": "低",
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～哲学",
+   "genres": [
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "エクセル最強の教科書",
+   "genres": [
+    "ハードスキル"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": false,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "認知バイアス辞典",
+   "genres": [
+    "思想"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "認知バイアス辞典2",
+   "genres": [
+    "思想"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  },
+  {
+   "title": "大学四年間の～宗教学",
+   "genres": [
+    "教養"
+   ],
+   "priority": null,
+   "medium": null,
+   "status": "未着手",
+   "bought": true,
+   "rating": null,
+   "finished": null
+  }
+ ],
+ "notionLinks": {
+  "タスク管理": "https://app.notion.com/p/bcd10a912f2a44eda321463c49059b09",
+  "Inbox": "https://app.notion.com/p/15cd2565d758489a8bd7bd7c873e6d61",
+  "読書リスト": "https://app.notion.com/p/2bcaf155527180f48676f5b0059a0e24",
+  "文章": "https://app.notion.com/p/248af155527181bab092f207c162b68e",
+  "運用ルール": "https://app.notion.com/p/39caf155527181ac983ee87d1673bf4e"
+ }
+}
